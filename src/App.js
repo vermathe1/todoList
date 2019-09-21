@@ -1,25 +1,33 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import SearchFieldWIthLabel from './components/SearchFieldWIthLabel'
+import CreateTodo from './components/CreateTodo'
+import TodoList from './components/TodoList'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <header className="App-header">
+      <SearchFieldWIthLabel
+        name = "Search"
+        onChange = { () =>{} }
+        label = "Todo Application"
+        placeholder = "Search"
+        type = "text"
+      />
+      <CreateTodo
+    name = "add Todo"
+    onChange = {  () =>{}  }
+    placeholder = "Create Todo"
+    type = "text"
+    />
+    <TodoList
+    title = "I am title"
+    onDeleteCLick = { () =>{} }
+    todos = {[{task:"task1"}]}
+    />
+    </header>
+   
   );
 }
 
