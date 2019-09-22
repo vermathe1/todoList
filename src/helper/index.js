@@ -1,4 +1,3 @@
-import React from 'react';
 import axios from 'axios';
 export const API_HOST = 'http://localhost:9001';
 

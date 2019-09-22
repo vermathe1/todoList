@@ -1,13 +1,12 @@
-import React from 'react';
 import {combineReducers} from 'redux';
 
 const todo = (state, action) => {
   switch (action.type) {
     case 'ADD_TODO':
       return {
-        id: action.id,
-        text: action.description,
-        completed: false,
+        id:action.id,
+        text:action.description,
+        completed:false,
       };
     case 'EDIT_TODO':
       if (state.id !== action.id) {

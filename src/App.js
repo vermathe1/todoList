@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import SearchFieldWIthLabel from './components/SearchFieldWIthLabel';
 import CreateTodo from './components/CreateTodo';
@@ -25,10 +24,10 @@ function App(props) {
       />
       <TodoListGroup>
       {props.todos.length &&
-        props.todos.map(todo => {
+        props.todos.map((todo,index) => {
           return (
             <TodoList
-              todos={todo}
+              todos={todo} key={index}
             />
           );
         })}

@@ -5,11 +5,11 @@ import searchImg from '../images/add.png';
 import { createTask } from "../helper";
 import {connect} from 'react-redux';
 import {addingTodo} from'../actions';
+import LoadingImage from './loading';
 
 const CreateTodo = (props) => {
  
  const [value,setValue] = React.useState('');
-  const { placeholder, type } = props;
 
   const handleChange = (e) => {
     setValue(e.target.value);
@@ -17,9 +17,11 @@ const CreateTodo = (props) => {
 
   const keyPressed = (e) => {
     if (e.key === 'Enter' && value.length) {
+      e.target.value = '';
      createTask(value)
      .then(res=>{
-      if(res.status == 201){
+      if(res.status === 201){
+       
         props.dispatch(addingTodo(res.data.task));
       }else{
         console.log("Some issue occured")
@@ -28,20 +30,22 @@ const CreateTodo = (props) => {
        err=>{
         console.log(err)
        }
-
       )
-     setValue('');
+
     }
   }
-    return (
-      <CreateTodoGroup image={searchImg}>
-        <div
-          className="createTodo"
-        >
+
+    return(
+      
+        
+          <CreateTodoGroup image={searchImg}>
+        <div className="createTodo">
           <InputField {...props} defaultValue = {value} onKeyPress={keyPressed} onChange = {handleChange}/>
         </div>
       </CreateTodoGroup>
-    );
+       
+     
+    )
  
 }
 

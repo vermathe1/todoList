@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<InputField />  matches the snapshop 1`] = `
+<input
+  autoFocus={true}
+  defaultValue=""
+  id=""
+  onBlur={[Function]}
+/>
+`;

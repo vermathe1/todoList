@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const toggleTodo = (id)=>{
 	return {
 		type: 'TOGGLE_TODO',

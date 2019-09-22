@@ -4,11 +4,13 @@ import InputField from '../atoms/inputField';
 import { updateTask, deleteTask, toggleTask } from "../helper";
 import { editTodo, deleteTodo, toggleTodo } from'../actions';
 import {connect} from 'react-redux';
+import LoadingImage from './loading';
 
 const TodoList = (props) => {
+  const [loading,setloading] = React.useState(false);
   const [value,setValue] = React.useState('');
   const [isEditing,setEditing] = React.useState(false);
-   const { title, todos } = props;
+   const { todos } = props;
 
    const handleChange = (e) => {
     setValue(e.target.value);
@@ -25,8 +27,9 @@ const TodoList = (props) => {
   }
 
   const handleDelete = () => {
+     setloading(true);
     deleteTask(props.todos.id)
-    .then(res=>{props.dispatch(deleteTodo(props.todos.id))}, err=>{console.log("err")})
+    .then(res=>{ setloading(false);props.dispatch(deleteTodo(props.todos.id))}, err=>{console.log("err")})
   }
 
   const keyPressed = (e) => {
@@ -57,7 +60,7 @@ const TodoList = (props) => {
       );
     }
     return(
-    <div className="list-todo" style= {taskStyle}>
+    <div className="list-todo" style= {taskStyle} >
       <input type="checkbox" onChange={handleSelectChange} defaultChecked={props.todos.completed}/>
       <span onClick = {handleEdit}> {todos.text} </span>
     </div>
@@ -66,12 +69,14 @@ const TodoList = (props) => {
   }
  
   return(
-   <Todos>
-      <div className="delete">
-        <button onClick = {handleDelete }> DELETE</button>
-      </div>
-     {renderItems(todos)}
-    </Todos>
+  <>
+    {loading ? <LoadingImage/> : (<Todos>
+        <div className="delete">
+          <button onClick = {handleDelete }> DELETE</button>
+        </div>
+       {renderItems(todos)}
+      </Todos>)}
+  </>
   )
  } 
 

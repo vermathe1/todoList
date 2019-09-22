@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components'
 
 export const TodoListWrapper = styled.div`
@@ -20,7 +19,7 @@ export const Searchgroup = styled.div`
 
     >label {
         flex: 2;
-        text-align: right;
+        text-align: center;
         white-space: nowrap;
         margin-right : 10px;
     }
@@ -84,7 +83,6 @@ export const Todos = styled.div`
     input{
         margin-right: 5px;
         flex:1
-        text-align: right;
     }
     span{
         max-width: 84%;
