@@ -4,8 +4,9 @@ import './App.css';
 import SearchFieldWIthLabel from './components/SearchFieldWIthLabel';
 import CreateTodo from './components/CreateTodo';
 import TodoList from './components/TodoList';
+import { connect } from 'react-redux';
 
-function App() {
+function App(props) {
   return (
     <header className="App-header">
       <SearchFieldWIthLabel
@@ -21,13 +22,23 @@ function App() {
         placeholder="Create Todo"
         type="text"
       />
-      <TodoList
-        title="I am title"
-        onDeleteCLick={() => {}}
-        todos={[{ task: 'task1' }]}
-      />
+      {props.todos.length &&
+        props.todos.map(todo => {
+          return (
+            <TodoList
+              title="I am title"
+              onDeleteCLick={() => {}}
+              todos={todo}
+            />
+          );
+        })}
     </header>
   );
 }
 
-export default App;
+const mapStateToProps = state => {
+  const todos = state.todos;
+  return { todos };
+};
+
+export default connect(mapStateToProps)(App);

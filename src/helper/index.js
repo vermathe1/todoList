@@ -13,50 +13,37 @@ export const getAllTasks = () => {
   );
 };
 
-export const updateTask = (id, title, description) => {
+export const updateTask = (id, description) => {
   return axios({
     method: 'put',
     url: API_HOST + '/task/update',
     params: {
       id,
-      title,
       description
     }
-  }).then(
-    suc => {
-      console.log(suc);
-    },
-    err => {
-      console.log(err);
-    }
-  );
+  })
 };
 
-export const createTask = (title, descrition) => {
+export const createTask = (description) => {
   return axios({
-    method: 'put',
-    url: API_HOST + '/task/create/',
+    method: 'post',
+    url: API_HOST + '/task/create',
     params: {
-      title,
       description
-    }
-  }).then(
-    suc => {
-      console.log(suc);
-    },
-    err => {
-      console.log(err);
-    }
-  );
+    }})
 };
 
 export const deleteTask = id => {
-  return axios.delete(API_HOST + '/task/delete', { params: { id: id } }).then(
-    suc => {
-      console.log(suc);
-    },
-    err => {
-      console.log(err);
+  return axios.delete(API_HOST + '/task/delete', { params: { id } })
+}
+
+export const toggleTask = (id, description) => {
+  return axios({
+    method: 'put',
+    url: API_HOST + '/task/toggletask',
+    params: {
+      id
     }
-  );
+  })
 };
+
