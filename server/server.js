@@ -1,7 +1,7 @@
 'use strict';
 
 const app = require('express')();
-var fs = require('fs')
+var fs = require('fs');
 var cors = require('cors');
 const tasksContainer = require('./tasks.json');
 app.use(cors());
@@ -13,10 +13,10 @@ const tasks = [];
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  fs.readFile('./tasks.json', function (err, data) {
-    var json = JSON.parse(data)
+  fs.readFile('./tasks.json', function(err, data) {
+    var json = JSON.parse(data);
     tasks = json.tasks;
-})
+  });
   return res.status(200).json(tasks);
 });
 

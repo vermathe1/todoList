@@ -1,12 +1,12 @@
-import styled from 'styled-components'
+import styled from 'styled-components';
 
 export const TodoListWrapper = styled.div`
-    display:flex;
-    flex-flow: row wrap;
-    font-family : 'sans-serif';
-    justify-content: flex-start;
-    align-items : flex-start;
-`
+  display: flex;
+  flex-flow: row wrap;
+  font-family: 'sans-serif';
+  justify-content: flex-start;
+  align-items: flex-start;
+`;
 export const Searchgroup = styled.div`
     display: flex;
     flex-direction: row;
@@ -49,15 +49,15 @@ export const Searchgroup = styled.div`
         font-size: 25px;
         outline: none;
     }
-`
+`;
 export const TodoListGroup = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items : flex-start;
-    flex-wrap: wrap;
-    padding: 20px
-`
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  padding: 20px;
+`;
 export const Todos = styled.div`
     display: flex;
     flex-direction: column;
@@ -89,8 +89,8 @@ export const Todos = styled.div`
         text-overflow: ellipsis;
         overflow: hidden;
     }
-`
-export const CreateTodoGroup =  styled.div`
+`;
+export const CreateTodoGroup = styled.div`
     display: flex;
     flex-direction: row;
     justify-content : center;
@@ -120,5 +120,4 @@ export const CreateTodoGroup =  styled.div`
         height: 26px;
         background-repeat : no-repeat;
     }
-`
-
+`;

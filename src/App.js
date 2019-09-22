@@ -4,12 +4,10 @@ import SearchFieldWIthLabel from './components/SearchFieldWIthLabel';
 import CreateTodo from './components/CreateTodo';
 import TodoList from './components/TodoList';
 import { connect } from 'react-redux';
-import { TodoListGroup } from './styles'
-
+import { TodoListGroup } from './styles';
 
 function App(props) {
   return (
-
     <header className="App-header">
       <SearchFieldWIthLabel
         name="Search"
@@ -17,20 +15,12 @@ function App(props) {
         placeholder="Search"
         type="text"
       />
-      <CreateTodo
-        name="add Todo"
-        placeholder="Create Todo"
-        type="text"
-      />
+      <CreateTodo name="add Todo" placeholder="Create Todo" type="text" />
       <TodoListGroup>
-      {props.todos.length &&
-        props.todos.map((todo,index) => {
-          return (
-            <TodoList
-              todos={todo} key={index}
-            />
-          );
-        })}
+        {props.todos.length &&
+          props.todos.map((todo, index) => {
+            return <TodoList todos={todo} key={index} />;
+          })}
       </TodoListGroup>
     </header>
   );
