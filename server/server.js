@@ -1,9 +1,11 @@
 'use strict';
 
 const app = require('express')();
+var fs = require('fs')
 var cors = require('cors');
 const tasksContainer = require('./tasks.json');
 app.use(cors());
+const tasks = [];
 
 /**
  * GET /tasks
@@ -11,7 +13,11 @@ app.use(cors());
  * Return the list of tasks with status code 200.
  */
 app.get('/tasks', (req, res) => {
-  return res.status(200).json(tasksContainer);
+  fs.readFile('./tasks.json', function (err, data) {
+    var json = JSON.parse(data)
+    tasks = json.tasks;
+})
+  return res.status(200).json(tasks);
 });
 
 /**
@@ -64,7 +70,6 @@ app.put('/task/update', (req, res) => {
 
   if (!Number.isNaN(id)) {
     const task = tasksContainer.tasks.find(item => item.id === id);
-
     if (task !== null) {
       task.description = req.query.description;
       return res.status(204).json({ message: 'Resource updated' });
@@ -96,7 +101,6 @@ app.post('/task/create', (req, res) => {
     //title: req.params.title,
     description: req.query.description
   };
-
   tasksContainer.tasks.push(task);
   return res.status(201).json({
     message: 'Resource created',
