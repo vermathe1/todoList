@@ -29,3 +29,11 @@ export const editTodo = ({id,description})=>{
 		description
 	};
 };
+
+export const saveAllTodos = (todos)=>{
+	return {
+		type:'SAVE_TODOS',
+		todos
+	};
+};
+

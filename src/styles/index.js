@@ -13,7 +13,8 @@ export const Searchgroup = styled.div`
     flex-direction: row;
     flex: 1;
     align-items : center;
-    margin: 10px
+    margin-bottom: 20px
+    
     border-bottom: 1px solid #fff;
     padding-bottom:5px;
 
@@ -52,6 +53,14 @@ export const Searchgroup = styled.div`
 `
 export const TodoListGroup = styled.div`
     display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items : flex-start;
+    flex-wrap: wrap;
+    padding: 20px
+`
+export const Todos = styled.div`
+    display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items : flex-start;
@@ -59,31 +68,28 @@ export const TodoListGroup = styled.div`
     border-radius: 8px;
     background-color: #5c5a5d;
     border: 1px solid #939393;
-    width: 30%;
-
-    h3{
-        margin:5px
-        margin-bottom: 20px;
-        color: #fff;
+    width: 26%;
+    margin: 20px;
+    .delete{
+        flex:2
     }
     .list-todo{
+        display: flex
         list-style : none;
         padding:0;
         margin :0;
         margin-top : 5px;
+        flex:5
     }
     input{
         margin-right: 5px;
+        flex:1
+        text-align: right;
     }
-
     span{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    li{
-        display: flex;
+        max-width: 84%;
+        text-overflow: ellipsis;
+        overflow: hidden;
     }
 `
 export const CreateTodoGroup =  styled.div`
@@ -91,6 +97,7 @@ export const CreateTodoGroup =  styled.div`
     flex-direction: row;
     justify-content : center;
     align-items : center;
+    margin-bottom: 40px
 
     input {
         padding: 5px 20px;

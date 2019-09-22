@@ -1,98 +1,78 @@
 import React from 'react';
-import { TodoListGroup } from '../styles';
+import { Todos } from '../styles';
 import InputField from '../atoms/inputField';
 import { updateTask, deleteTask, toggleTask } from "../helper";
 import { editTodo, deleteTodo, toggleTodo } from'../actions';
 import {connect} from 'react-redux';
 
-class TodoList extends React.Component{
+const TodoList = (props) => {
+  const [value,setValue] = React.useState('');
+  const [isEditing,setEditing] = React.useState(false);
+   const { title, todos } = props;
 
-  constructor(props){
-    super(props);
-    this.state ={
-      isEditing: false,
-      value: ''
-    };
+   const handleChange = (e) => {
+    setValue(e.target.value);
   }
 
-   handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  }
-
-  handleSelectChange = (e) => {
-    toggleTask(this.props.todos.id)
-    .then(res=>{this.props.dispatch(toggleTodo(this.props.todos.id))}, err=>{console.log("err")})
+  const handleSelectChange = (e) => {
+    toggleTask(props.todos.id)
+    .then(res=>{props.dispatch(toggleTodo(props.todos.id))}, err=>{console.log("err")})
  
   }
 
-  handleEdit = () => {
-    this.setState({
-      isEditing:true
-    });
+  const handleEdit = () => {
+    setEditing(true)
   }
 
-  handleDelete = () => {
-    deleteTask(this.props.todos.id)
-    .then(res=>{this.props.dispatch(deleteTodo(this.props.todos.id))}, err=>{console.log("err")})
+  const handleDelete = () => {
+    deleteTask(props.todos.id)
+    .then(res=>{props.dispatch(deleteTodo(props.todos.id))}, err=>{console.log("err")})
   }
 
-  keyPressed = (e) => {
+  const keyPressed = (e) => {
     if (e.key === 'Enter') {
-      if(!this.state.value.length){
-         this.setState({
-      isEditing:false
-    });
+      if(!value.length){
+        setEditing(false);
+        return;
       }
-      const item = {id :this.props.todos.id, description:this.state.value}
-     updateTask(this.props.todos.id,this.state.value)
-       .then(res=>{this.props.dispatch(editTodo(item)); this.setState({isEditing: false})}, err=>{console.log("err")})
+      const item = {id :props.todos.id, description:value}
+     updateTask(props.todos.id,value)
+       .then(res=>{props.dispatch(editTodo(item)); setEditing(false)}, err=>{console.log("err")})
     }
   }
 
-  onBlur = (e) =>{
-    this.setState({
-      isEditing:false
-    });
+  const onBlur = (e) =>{
+    setEditing(false)
   }
 
-   renderItems = (todos) => {
-
+   const renderItems = (todos) => {
      const taskStyle = {
-      "color" : this.props.todos.completed ? 'red' : 'white',
-      "textDecoration" : this.props.todos.completed ? 'line-through' : ''
+      "color" : props.todos.completed ? 'red' : 'white',
+      "textDecoration" : props.todos.completed ? 'line-through' : ''
     }
 
-    if(this.state.isEditing){
+    if(isEditing){
       return(
-          <InputField type="text" defaultValue = { todos.text } onKeyPress={this.keyPressed} onChange = {this.handleChange} id="edit" onBlur = {this.onBlur}/>
+          <InputField type="text" defaultValue = { todos.text } onKeyPress={keyPressed} onChange = {handleChange} id="edit" onBlur = {onBlur}/>
       );
     }
     return(
-    <ul className="list-todo">
-      <li style= {taskStyle}>
-         <input type="checkbox" onChange={this.handleSelectChange} defaultChecked={this.props.todos.completed}/>
-         <span onClick = {this.handleEdit}> {todos.text} </span>
-       </li>
-    </ul>
+    <div className="list-todo" style= {taskStyle}>
+      <input type="checkbox" onChange={handleSelectChange} defaultChecked={props.todos.completed}/>
+      <span onClick = {handleEdit}> {todos.text} </span>
+    </div>
+
     );
   }
  
- render(){
-  const { title, todos } = this.props;
   return(
-    <TodoListGroup>
+   <Todos>
       <div className="delete">
-        <button onClick = { this.handleDelete }> DELETE</button>
+        <button onClick = {handleDelete }> DELETE</button>
       </div>
-      <h3>{title}</h3>
-     {this.renderItems(todos)}
-    </TodoListGroup>
+     {renderItems(todos)}
+    </Todos>
   )
  } 
-}
 
 export default connect()(TodoList);
-
-
-
-

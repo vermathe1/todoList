@@ -6,48 +6,43 @@ import { createTask } from "../helper";
 import {connect} from 'react-redux';
 import {addingTodo} from'../actions';
 
-class CreateTodo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: '' };
+const CreateTodo = (props) => {
+ 
+ const [value,setValue] = React.useState('');
+  const { placeholder, type } = props;
+
+  const handleChange = (e) => {
+    setValue(e.target.value);
   }
 
-  handleChange = (e) => {
-    this.setState({ value: e.target.value });
-  }
-
-  keyPressed = (e) => {
-    if (e.key === 'Enter' && this.state.value.length) {
-     createTask(this.state.value)
+  const keyPressed = (e) => {
+    if (e.key === 'Enter' && value.length) {
+     createTask(value)
      .then(res=>{
-
-     	if(res.status == 201){
-     		this.props.dispatch(addingTodo(res.data.task));
-     	}else{
-     		console.log("Some issue occured")
-     	}
+      if(res.status == 201){
+        props.dispatch(addingTodo(res.data.task));
+      }else{
+        console.log("Some issue occured")
+      }
      },
-     	 err=>{
-     	 	console.log(err)
-     	 }
+       err=>{
+        console.log(err)
+       }
 
-     	)
-     this.setState({ value: '' });
+      )
+     setValue('');
     }
   }
-
-  render() {
-    const { placeholder, type } = this.props;
     return (
       <CreateTodoGroup image={searchImg}>
         <div
           className="createTodo"
         >
-          <InputField {...this.props} defaultValue = {this.state.value} onKeyPress={this.keyPressed} onChange = {this.handleChange}/>
+          <InputField {...props} defaultValue = {value} onKeyPress={keyPressed} onChange = {handleChange}/>
         </div>
       </CreateTodoGroup>
     );
-  }
+ 
 }
 
 export default connect()(CreateTodo);

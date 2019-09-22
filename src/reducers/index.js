@@ -40,6 +40,8 @@ const todos = (state = [], action) => {
       return state.filter(t =>
         t.id !== action.id
       );
+    case 'SAVE_TODOS':
+      return [...action.todos];
     default:
       return state;
   }

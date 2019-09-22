@@ -3,14 +3,7 @@ import axios from 'axios';
 export const API_HOST = 'http://localhost:9001';
 
 export const getAllTasks = () => {
-  return axios.get(API_HOST + '/tasks').then(
-    suc => {
-      console.log(suc);
-    },
-    err => {
-      console.log(err);
-    }
-  );
+  return axios.get(API_HOST + '/tasks')
 };
 
 export const updateTask = (id, description) => {
